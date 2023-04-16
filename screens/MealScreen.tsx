@@ -27,8 +27,6 @@ function MealScreen(
     const favouritesContext = useContext(FavouritesContext);
 
     const mealIsFavourite = favouritesContext.ids.includes(mealId);
-    console.log(mealIsFavourite);
-    
 
     const onHeaderButtonPressHandler = () => {
         if (mealIsFavourite) {
