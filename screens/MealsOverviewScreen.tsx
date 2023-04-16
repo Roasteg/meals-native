@@ -1,36 +1,38 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import RootStackParamList from "../navigation/navigation";
+import StackNavigation from "../navigation/StackNavigation";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { MEALS } from "../data/data";
-import MealItem from "../components/MealItem";
+import { MEALS, CATEGORIES } from "../data/data";
+import { useLayoutEffect } from "react";
+import MealItem from "../components/MealsList/MealItem";
+import MealsList from "../components/MealsList/MealsList";
 
-type NavigationProp = NativeStackScreenProps<
-    RootStackParamList,
-    "MealsOverview"
->;
+type NavigationProp = NativeStackScreenProps<StackNavigation, "MealsOverview">;
 
-function MealsOverviewScreen({ route }: NavigationProp) {
+function MealsOverviewScreen(
+    this: typeof MealsOverviewScreen,
+    { route, navigation }: NavigationProp
+) {
     const categoryId = route.params.categoryId;
     const displayedMeals = MEALS.filter(
         (mealItem) => mealItem.categoryIds.indexOf(categoryId) >= 0
     );
+    
+    useLayoutEffect(() => {
+        const categoryTitle = CATEGORIES.find(
+            (category) => category.id === categoryId
+        )?.title;
+
+        navigation.setOptions({ title: categoryTitle });
+    }, [categoryId, navigation]);
 
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={displayedMeals}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => <MealItem title={item.title} />}
-            />
-        </View>
-    );
+        <MealsList mealsList={displayedMeals} />
+    )
+    
 }
 
 export default MealsOverviewScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-    },
+
 });

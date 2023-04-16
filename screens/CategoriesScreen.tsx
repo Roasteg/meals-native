@@ -1,11 +1,17 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { DrawerScreenProps } from "@react-navigation/drawer";
 import CategoryGrid from "../components/CategoryGrid";
 import { CATEGORIES } from "../data/data";
 import Category from "../models/category";
-import RootStackParamList from "../navigation/navigation";
+import StackNavigation from "../navigation/StackNavigation";
+import DrawerNavigation from "../navigation/DrawerNavigation";
 
-type NavigationProp = NativeStackScreenProps<RootStackParamList, "MealsCategories">;
+type NavigationProp = CompositeScreenProps<
+    DrawerScreenProps<DrawerNavigation, "Home">,
+    NativeStackScreenProps<StackNavigation, "MealsCategories">
+>;
 
 function CategoriesScreen({ navigation }: NavigationProp) {
     function renderCategoryItem(item: Category) {
