@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable, ViewStyle } from "react-native";
+import { StyleSheet, Pressable, ViewStyle } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 type Props = {
@@ -14,7 +14,7 @@ function IconButton(props: Props) {
             onPress={props.onPress}
             style={({ pressed }) => pressed && styles.pressed}
         >
-            <Ionicons name={props.icon} size={24} color={props.color}/>
+            <Ionicons name={props.icon} size={24} color={props.color} />
         </Pressable>
     );
 }

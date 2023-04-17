@@ -1,7 +1,11 @@
 import { Pressable, StyleSheet, Text, View, Platform } from "react-native";
 import React from "react";
 
-function CategoryGrid(props: { title: string; color: string, onPress: () => void }) {
+function CategoryGrid(props: {
+    title: string;
+    color: string;
+    onPress: () => void;
+}) {
     return (
         <View style={styles.gridItem}>
             <Pressable

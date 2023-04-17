@@ -5,7 +5,6 @@ import {
     View,
     Image,
     ScrollView,
-    Button,
 } from "react-native";
 import StackNavigation from "../navigation/StackNavigation";
 import { MEALS } from "../data/data";
@@ -16,7 +15,10 @@ import { useContext, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import IconButton from "../components/IconButton";
 import { AppDispatch, RootState } from "../store/redux/store";
-import { addFavourite, removeFavourite } from "../store/redux/slices/favourites";
+import {
+    addFavourite,
+    removeFavourite,
+} from "../store/redux/slices/favourites";
 
 type NavigationProp = NativeStackScreenProps<StackNavigation, "MealScreen">;
 
@@ -26,7 +28,9 @@ function MealScreen(
 ) {
     const mealId = route.params.mealId;
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
-    const favouriteMealIds = useSelector((state: RootState) => state.favouriteMeals.ids);
+    const favouriteMealIds = useSelector(
+        (state: RootState) => state.favouriteMeals.ids
+    );
     const dispatch: AppDispatch = useDispatch();
 
     const mealIsFavourite = favouriteMealIds.includes(mealId);

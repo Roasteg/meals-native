@@ -1,16 +1,19 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Button } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
+import { Provider } from "react-redux";
+
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealScreen from "./screens/MealScreen";
+
 import StackNavigation from "./navigation/StackNavigation";
 import DrawerNavigation from "./navigation/DrawerNavigation";
 import FavouritesScreen from "./screens/FavouritesScreen";
-import { Provider } from "react-redux";
+
 import store from "./store/redux/store";
 
 const Stack = createNativeStackNavigator<StackNavigation>();
