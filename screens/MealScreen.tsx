@@ -13,8 +13,10 @@ import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
 import { useContext, useLayoutEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import IconButton from "../components/IconButton";
-import { FavouritesContext } from "../store/context/favourites-context";
+import { AppDispatch, RootState } from "../store/redux/store";
+import { addFavourite, removeFavourite } from "../store/redux/slices/favourites";
 
 type NavigationProp = NativeStackScreenProps<StackNavigation, "MealScreen">;
 
@@ -24,15 +26,16 @@ function MealScreen(
 ) {
     const mealId = route.params.mealId;
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
-    const favouritesContext = useContext(FavouritesContext);
+    const favouriteMealIds = useSelector((state: RootState) => state.favouriteMeals.ids);
+    const dispatch: AppDispatch = useDispatch();
 
-    const mealIsFavourite = favouritesContext.ids.includes(mealId);
+    const mealIsFavourite = favouriteMealIds.includes(mealId);
 
     const onHeaderButtonPressHandler = () => {
         if (mealIsFavourite) {
-            favouritesContext.removeFavourite(mealId);
+            dispatch(removeFavourite(mealId));
         } else {
-            favouritesContext.addFavourite(mealId);
+            dispatch(addFavourite(mealId));
         }
     };
 
